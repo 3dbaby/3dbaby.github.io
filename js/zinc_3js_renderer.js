@@ -696,10 +696,10 @@ Zinc.Scene = function ( containerIn, rendererIn) {
 		_this.camera = new THREE.PerspectiveCamera( 40, container.clientWidth / container.clientHeight, 0.0, 10.0);
 		  
 		_this.ambient = new THREE.AmbientLight( 0x202020 );
-		//scene.add( _this.ambient );
+		scene.add( _this.ambient );
 	
 		_this.directionalLight = new THREE.DirectionalLight( 0x777777  );
-		//scene.add( _this.directionalLight );
+		scene.add( _this.directionalLight );
 	
 		zincCameraControls = new ZincCameraControls( _this.camera, rendererIn.domElement, rendererIn, scene )
 		zincCameraControls.setDirectionalLight(_this.directionalLight);
@@ -1326,7 +1326,7 @@ Zinc.Renderer = function (containerIn, window) {
 	this.addLogo = function() {
 		logoSprite = new THREE.Sprite();
 		var logo = THREE.ImageUtils.loadTexture(
-				"images/abi_big_logo_transparent_small.png", undefined, createHUDSprites(logoSprite))
+				"images/test.png", undefined, createHUDSprites(logoSprite))
 	}
 	
 	this.render = function() {
