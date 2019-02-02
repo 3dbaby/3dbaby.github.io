@@ -23,8 +23,57 @@
 				display:block;
 			}
             
+            .navigation_button_geo {
+              padding: 5px 5px;
+              font-size: 8px;
+              text-align: center;
+              cursor: pointer;
+              outline: none;
+              color: #fff;
+              background-color: skyblue;
+              border: none;
+              border-radius: 15px;
+              
+              
+              position:fixed;
+              z-index: 0;
+              
+              right: 0px;
+              width:150;
+       
+
+              
+            }
+            
+            .navigation_button_scene {
+              padding: 5px 5px;
+              font-size: 8px;
+              text-align: center;
+              cursor: pointer;
+              outline: none;
+              color: #fff;
+              background-color: olivedrab;
+              border: none;
+              border-radius: 15px;
+                
+              
+              width:150;
+              
+              position:fixed;
+              
+              top:80px;
+              right: 0px;
+              
+
+              
+            }
+           
+           
+            
             .sidenav {
-              width: 180px;
+                
+              width: 0;
+              height: 70%;
               position: fixed;
               z-index: 0;
               top: 20px;
@@ -32,8 +81,12 @@
          
               overflow-y: scroll;
               
-              height: 80%;
+              
               text-align: left;
+              background-color: black;
+              opacity:0.8;
+              border-radius: 6px;
+                
 /*
               background-color: #000;
               border-style:solid ;
@@ -42,11 +95,22 @@
               
               
             }
+            
+
+            
+            .sidenav .closebtn {
+              position: absolute;
+              top: 0;
+              right: 25px;
+              font-size: 36px;
+              margin-left: 50px;
+                color: white;
+            }
             .sidenav p {
               
               display: block;
-              background-color: #000;
-              border-style:solid ;
+              
+              
               border-color:dimgrey;
               padding-left: 10px;
              
@@ -70,9 +134,20 @@
 	<body style="height:100%">
 		3D fetus project
         
-        <div class="sidenav">
+        <div class="navigation_button_geo">
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Settings</span>
+        </div>
+        
+
+
+        
+   
+        
+        <div class="sidenav" id="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             
             <p id='myText'>   
+                 <br />
                 <a><input type="checkbox" onclick="updateGeo(this)" id="arm_left" checked> arm_left    </a><br /> 
                 <a><input type="checkbox" onclick="updateGeo(this)" id="arm_right" checked> arm_right</a><br /> 
                 <a><input type="checkbox" onclick="updateGeo(this)" id="brain_left" checked> brain_left</a><br /> 
@@ -91,17 +166,23 @@
                 <a><input type="checkbox" onclick="updateGeo(this)" id="womb" checked> womb</a><br /> 
                 <a><input type="checkbox" onclick="updateGeo(this)" id="cord" checked> cord</a><br /> 
                 <a><input type="checkbox" onclick="updateGeo(this)" id="uv" checked> uv</a><br /> 
+                
                 <a><input type="checkbox" onclick="updateGeo(this)" id="torso" checked> torso</a><br /> 
+                
+                <a><input type="checkbox" onclick="updateGeo(this)" id="portal" checked> portal</a><br /> 
+                <a><input type="checkbox" onclick="updateGeo(this)" id="aorta" checked> aorta</a><br /> 
+                <a><input type="checkbox" onclick="updateGeo(this)" id="bladder" checked> bladder</a><br /> 
                 
             
             
             </p>
             
-            <p>
-                <button name="View All" value="OK" type="button" onclick="viewAll()">View All</button>
-                <button name="Hide All" value="OK" type="button" onclick="hideAll()">Hide All</button>
-                <button name="Show All" value="OK" type="button" onclick="showAll()">Show All</button>
-            </p>
+             <span style="font-size:15px;cursor:pointer" onclick="viewAll()">&#9206;View All</span> <br/>
+            <span style="font-size:15px;cursor:pointer" onclick="hideAll()">&#9206;Hide All</span> <br/>
+            <span style="font-size:15px;cursor:pointer" onclick="showAll()">&#9206;Show All</span> <br/>
+          
+            
+           
             
         </div>
 
@@ -127,7 +208,7 @@
 			zincRenderer.setCurrentScene(scene);
 			zincRenderer.animate();
 
-
+            /* Zinc functions */
 			function viewAll()
 			{
 				scene.viewAll();
@@ -151,6 +232,7 @@
                 scene.forEachGeometry(
                     function (geo_){
                         geo_.setVisibility(false);
+                        console.log(geo_)
                         var checkbox_ = document.getElementById(geo_.groupName);
                         checkbox_.checked=false;
                         
@@ -169,6 +251,18 @@
                     }
                 )
             }
+            
+            /* html functions */
+            function openNav() {
+              document.getElementById("sidenav").style.width = "150px";
+            }
+
+            function closeNav() {
+              document.getElementById("sidenav").style.width = "0";
+            }
+            
+            
+          
 		</script>
 	</body>
 </html>
